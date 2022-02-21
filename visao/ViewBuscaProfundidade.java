@@ -3,49 +3,27 @@ package visao;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class MainPage extends javax.swing.JFrame implements Puzzle{
-
-    final public JFileChooser fc = new JFileChooser();
-
-    public MainPage() {
+public class ViewBuscaProfundidade extends javax.swing.JFrame implements Puzzle {
+    
+    public ViewBuscaProfundidade() {
         initComponents();
-        fc.setCurrentDirectory(new File("C:\\Users\\Bruce Vahldick\\Documents\\NetBeansProjects\\BallSortPuzzle\\src\\puzzles"));
     }
 
     public void toggleView(boolean stage) {
         this.setVisible(stage);
     }
-
-    public void addActionSelectFile(ActionListener action) {
-        selectFile.addActionListener(action);
-    }
-    
-    public void addActionBuscaLargura(ActionListener action){
-        buscaLargura.addActionListener(action);
-    }
-    
-    public void addActionBuscaProfundidade(ActionListener actionListener) {
-        buscaProfundidade.addActionListener(actionListener);
-    }
-    
-    public void addActionSobre(ActionListener actionListener){
-        sobre.addActionListener(actionListener);
-    }
     
     @Override
-    public void clearMainPanel(){
+    public void clearMainPanel() {
         painelPrincipal.removeAll();
     }
 
     @Override
     public void addBall(String background, int x, int y) {
-        
+
         int width = 40;
         int height = 40;
 
@@ -61,21 +39,13 @@ public class MainPage extends javax.swing.JFrame implements Puzzle{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        selectFile = new javax.swing.JButton();
-        buscaLargura = new javax.swing.JButton();
-        buscaProfundidade = new javax.swing.JButton();
-        sobre = new javax.swing.JButton();
         painelPrincipal = new javax.swing.JPanel();
+        buscaProfundidade = new javax.swing.JButton();
+        buscaProfundidade1 = new javax.swing.JButton();
+        buscaProfundidade2 = new javax.swing.JButton();
+        buscaProfundidade3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        selectFile.setText("Carregar");
-
-        buscaLargura.setText("Largura");
-
-        buscaProfundidade.setText("Profundidade");
-
-        sobre.setText("Sobre");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         painelPrincipal.setMaximumSize(new java.awt.Dimension(560, 160));
@@ -94,25 +64,32 @@ public class MainPage extends javax.swing.JFrame implements Puzzle{
             .addGap(0, 160, Short.MAX_VALUE)
         );
 
+        buscaProfundidade.setText("|<<");
+
+        buscaProfundidade1.setText(">>");
+
+        buscaProfundidade2.setText("<<");
+
+        buscaProfundidade3.setText(">>|");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(selectFile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buscaLargura)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buscaProfundidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sobre)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(buscaProfundidade, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buscaProfundidade2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buscaProfundidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buscaProfundidade3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,10 +98,10 @@ public class MainPage extends javax.swing.JFrame implements Puzzle{
                 .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectFile)
-                    .addComponent(buscaLargura)
-                    .addComponent(buscaProfundidade)
-                    .addComponent(sobre))
+                    .addComponent(buscaProfundidade1)
+                    .addComponent(buscaProfundidade3)
+                    .addComponent(buscaProfundidade2)
+                    .addComponent(buscaProfundidade))
                 .addContainerGap())
         );
 
@@ -143,11 +120,11 @@ public class MainPage extends javax.swing.JFrame implements Puzzle{
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscaLargura;
     private javax.swing.JButton buscaProfundidade;
+    private javax.swing.JButton buscaProfundidade1;
+    private javax.swing.JButton buscaProfundidade2;
+    private javax.swing.JButton buscaProfundidade3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel painelPrincipal;
-    private javax.swing.JButton selectFile;
-    private javax.swing.JButton sobre;
     // End of variables declaration//GEN-END:variables
 }

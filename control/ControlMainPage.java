@@ -1,6 +1,8 @@
 package control;
 
 import ballsortpuzzle.BallsortPuzzle;
+import busca.BuscaLargura;
+import busca.Nodo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import visao.MainPage;
@@ -9,7 +11,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import visao.Puzzle;
+import visao.Sobre;
 import visao.ViewBuscaLargura;
+import visao.ViewBuscaProfundidade;
 
 public class ControlMainPage {
 
@@ -24,16 +28,37 @@ public class ControlMainPage {
     public void addActions() {
         actionSelectFile();
         actionBuscaLargura();
+        actionBuscaProfundidade();
+        actionSobre();
     }
 
     public void toggleView(boolean stage) {
         this.mainPage.toggleView(stage);
     }
-    
-    public void iniciarBuscaLargura(){
-        ViewBuscaLargura viewBuscaLargura = new ViewBuscaLargura(mainPage.getPainelPrincipal());
+
+    public void iniciarBuscaLargura() {
+        ViewBuscaLargura viewBuscaLargura = new ViewBuscaLargura();
         buildPuzzle(puzzle.returnBalls(), viewBuscaLargura);
         viewBuscaLargura.toggleView(true);
+
+        BuscaLargura<BallsortPuzzle> bLargura = new BuscaLargura<BallsortPuzzle>();
+        Nodo n = bLargura.busca(puzzle);
+        if (n == null) {
+            System.out.println("não existe solução");
+        } else {
+            Nodo w = n;
+            while (w != null) {
+                BallsortPuzzle bsp = (BallsortPuzzle) w.getEstado();
+                System.out.println(bsp.toString());
+                w = w.getPai();
+            }
+        }
+    }
+
+    public void iniciarBuscaProfundidade() {
+        ViewBuscaProfundidade viewBuscaProfundidade = new ViewBuscaProfundidade();
+        buildPuzzle(puzzle.returnBalls(), viewBuscaProfundidade);
+        viewBuscaProfundidade.toggleView(true);
     }
 
     public void actionSelectFile() {
@@ -55,7 +80,29 @@ public class ControlMainPage {
         mainPage.addActionBuscaLargura(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mainPage.toggleView(false);
                 iniciarBuscaLargura();
+            }
+        });
+    }
+
+    public void actionBuscaProfundidade() {
+        mainPage.addActionBuscaProfundidade(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                iniciarBuscaProfundidade();
+                mainPage.toggleView(false);
+            }
+        });
+    }
+
+    public void actionSobre() {
+        mainPage.addActionSobre(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Sobre jif = new Sobre();
+                mainPage.add(jif);
+                jif.setVisible(true);
             }
         });
     }
@@ -78,7 +125,7 @@ public class ControlMainPage {
     public String[] buildPuzzle(String s, Puzzle frame) {
         frame.clearMainPanel();
 
-        String[] result = s.split("/");
+        String[] result = s.split("\\s");
 
         final int yInit = 120;
 
@@ -89,21 +136,12 @@ public class ControlMainPage {
             if (!r.equals("brk")) {
                 frame.addBall(r, x, y);
                 y = y - 40;
-            } else if(!r.equals("fim")) {
+            } else {
                 y = yInit;
                 x = x + 40;
             }
         }
 
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 4; j++) {
-                frame.addBall("FFFFFF", x, y);
-                y = y - 40;
-            }
-            y = yInit;
-            x = x + 40;
-        }
-        
         return result;
 
     }

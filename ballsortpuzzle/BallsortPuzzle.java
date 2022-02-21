@@ -19,6 +19,7 @@ A349A4 - roxo
 22B14C - verde claro
 00A2E8 - azul claro
 FFAEC9 - rosa
+
 B97A57 - marrom
 3F48CC - azul escuro
 008040 - verde escuro
@@ -37,6 +38,10 @@ public class BallsortPuzzle implements Estado {
 
         public boolean apenasUmaCor() {
 
+            if (top() == null) {
+                return true;
+            }
+            
             if (size() == 4) {
                 Coluna coluna = new Coluna();
                 coluna.push(this.pop());
@@ -53,14 +58,34 @@ public class BallsortPuzzle implements Estado {
                 this.empilhar(coluna);
                 return true;
             }
-
+            
             return false;
         }
 
         public void empilhar(Coluna coluna) {
-            for (int i = 0; i < 4; i++) {
+            int size = coluna.size();
+            for (int i = 0; i < size; i++) {
                 this.push(coluna.pop());
             }
+        }
+
+        public Coluna copiar() {
+            Coluna coluna = new Coluna();
+            int size = size();
+            String bola[] = new String[size];
+            for (int i = 0; i < size; i++) {
+                bola[i] = (String) pop();
+                coluna.push(bola[i]);
+            }
+
+            for (int i = size - 1; i >= 0; i--) {
+                this.push(bola[i]);
+            }
+
+            Coluna colunaFinal = new Coluna();
+            colunaFinal.empilhar(coluna);
+
+            return colunaFinal;
         }
 
     }
@@ -69,7 +94,14 @@ public class BallsortPuzzle implements Estado {
 
     public BallsortPuzzle(String[] bolas) {
         colunas = new ArrayList<Coluna>();
-        for (int i = 0; i < 14; i++) {
+        int colunasLength = 0;
+        for (int i = 0; i < bolas.length; i++) {
+            if (bolas[i].equals("brk")) {
+                colunasLength++;
+            }
+        }
+
+        for (int i = 0; i < colunasLength + 3; i++) {
             colunas.add(new Coluna());
         }
 
@@ -89,15 +121,18 @@ public class BallsortPuzzle implements Estado {
     }
 
     public String returnBalls() {
-        Coluna coluna = new Coluna();
+        Coluna coluna;
         String bolas = "";
+
         for (int i = 0; i < colunas.size(); i++) {
-            for (int j = 0; j < colunas.get(i).size(); j++) {
-                bolas += colunas.get(i).top() + "/";
-                coluna.push(colunas.get(i).pop());
-            }
-            bolas += "brk/";
+            coluna = new Coluna();
+            int tmn = colunas.get(i).size();
             coluna.empilhar(colunas.get(i));
+            for (int j = 0; j < tmn; j++) {
+                bolas += coluna.top() + " ";
+                colunas.get(i).push(coluna.pop());
+            }
+            bolas += "brk ";
         }
 
         return bolas;
@@ -112,9 +147,11 @@ public class BallsortPuzzle implements Estado {
     public boolean ehMeta() {
         for (Coluna c : colunas) {
             if (!c.apenasUmaCor()) {
+                
                 return false;
             }
         }
+        
         return true;
     }
 
@@ -128,13 +165,21 @@ public class BallsortPuzzle implements Estado {
         List<BallsortPuzzle> suc = new LinkedList<>();
 
         for (int colunaI = 0; colunaI < colunas.size(); colunaI++) {
-            for (int colunaJ = 0; colunaJ < colunas.size(); colunaJ++) {
-                if (colunaI != colunaJ) {
-                    if (colunas.get(colunaJ).podeEntrar((String) colunas.get(colunaI).top())) {
-                        ArrayList<Coluna> colunasNova = colunas;
-                        colunas.get(colunaJ).push((String) colunas.get(colunaI).pop());
-                        BallsortPuzzle novo = new BallsortPuzzle(colunasNova);
-                        suc.add(novo);
+            if (colunas.get(colunaI).top() != null) {
+                for (int colunaJ = colunas.size() - 1; colunaJ >= 0; colunaJ--) {
+                    if (colunaI != colunaJ && colunas.get(colunaJ).podeEntrar((String) colunas.get(colunaI).top())) {
+                        if (!colunas.get(colunaI).apenasUmaCor()) {
+
+                            ArrayList<Coluna> colunasNova = new ArrayList<Coluna>();
+
+                            for (Coluna coluna : colunas) {
+                                colunasNova.add(coluna.copiar());
+                            }
+
+                            colunasNova.get(colunaJ).push(colunasNova.get(colunaI).pop());
+                            BallsortPuzzle novo = new BallsortPuzzle(colunasNova);
+                            suc.add(novo);
+                        }
                     }
                 }
             }
@@ -145,7 +190,10 @@ public class BallsortPuzzle implements Estado {
 
     @Override
     public String toString() {
-        return "BallsortPuzzle{" + "colunas=" + colunas + '}';
+        return returnBalls();
     }
 
+    public ArrayList<Coluna> getColunas() {
+        return colunas;
+    }
 }

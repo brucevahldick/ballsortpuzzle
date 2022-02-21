@@ -8,9 +8,7 @@ import javax.swing.JLabel;
 
 public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
     
-    public ViewBuscaLargura(javax.swing.JPanel painelPrincipal) {
-        
-        this.painelPrincipal = painelPrincipal;
+    public ViewBuscaLargura() {
         initComponents();
     }
 
@@ -42,6 +40,10 @@ public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
 
         jPanel1 = new javax.swing.JPanel();
         painelPrincipal = new javax.swing.JPanel();
+        buscaProfundidade = new javax.swing.JButton();
+        buscaProfundidade1 = new javax.swing.JButton();
+        buscaProfundidade2 = new javax.swing.JButton();
+        buscaProfundidade3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +64,14 @@ public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
             .addGap(0, 160, Short.MAX_VALUE)
         );
 
+        buscaProfundidade.setText("|<<");
+
+        buscaProfundidade1.setText(">>");
+
+        buscaProfundidade2.setText("<<");
+
+        buscaProfundidade3.setText(">>|");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,13 +80,29 @@ public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
                 .addContainerGap()
                 .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(buscaProfundidade, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buscaProfundidade2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buscaProfundidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buscaProfundidade3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscaProfundidade1)
+                    .addComponent(buscaProfundidade3)
+                    .addComponent(buscaProfundidade2)
+                    .addComponent(buscaProfundidade))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,6 +120,10 @@ public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscaProfundidade;
+    private javax.swing.JButton buscaProfundidade1;
+    private javax.swing.JButton buscaProfundidade2;
+    private javax.swing.JButton buscaProfundidade3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables

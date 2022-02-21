@@ -7,7 +7,7 @@ import java.util.Queue;
  *
  * Busca a solucao por busca em largura.
  *
- *  @author Jomi Fred H�bner
+ *  @author Jomi Fred Hbner
  *  
  *  Tratamento com Tipos genericos adicionados por Adilson Vahldick.
  *  
