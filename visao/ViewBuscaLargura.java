@@ -1,8 +1,5 @@
 package visao;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -23,7 +20,7 @@ public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
 
     @Override
     public void addBall(String background, int x, int y) {
-
+        
         int width = 40;
         int height = 40;
 

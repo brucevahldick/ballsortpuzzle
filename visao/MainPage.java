@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainPage extends javax.swing.JFrame implements Puzzle{
+public class MainPage extends javax.swing.JFrame implements Puzzle {
 
     final public JFileChooser fc = new JFileChooser();
 
@@ -25,27 +25,27 @@ public class MainPage extends javax.swing.JFrame implements Puzzle{
     public void addActionSelectFile(ActionListener action) {
         selectFile.addActionListener(action);
     }
-    
-    public void addActionBuscaLargura(ActionListener action){
+
+    public void addActionBuscaLargura(ActionListener action) {
         buscaLargura.addActionListener(action);
     }
-    
+
     public void addActionBuscaProfundidade(ActionListener actionListener) {
         buscaProfundidade.addActionListener(actionListener);
     }
-    
-    public void addActionSobre(ActionListener actionListener){
+
+    public void addActionSobre(ActionListener actionListener) {
         sobre.addActionListener(actionListener);
     }
-    
+
     @Override
-    public void clearMainPanel(){
+    public void clearMainPanel() {
         painelPrincipal.removeAll();
     }
 
     @Override
     public void addBall(String background, int x, int y) {
-        
+
         int width = 40;
         int height = 40;
 

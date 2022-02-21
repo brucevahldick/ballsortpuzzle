@@ -7,18 +7,22 @@ import java.util.Queue;
  *
  * Busca a solucao por busca em largura.
  *
- *  @author Jomi Fred Hbner
- *  
- *  Tratamento com Tipos genericos adicionados por Adilson Vahldick.
- *  
+ * @author Jomi Fred Hbner
+ *
+ * Tratamento com Tipos genericos adicionados por Adilson Vahldick.
+ *
  */
 public class BuscaLargura<E extends Estado> extends Busca<E> {
-    
-    /** busca sem mostrar status */
+
+    /**
+     * busca sem mostrar status
+     */
     public BuscaLargura() {
     }
-    
-    /** busca mostrando status */
+
+    /**
+     * busca mostrando status
+     */
     public BuscaLargura(MostraStatusConsole ms) {
         super(ms);
     }
@@ -26,13 +30,13 @@ public class BuscaLargura<E extends Estado> extends Busca<E> {
     public Nodo busca(E inicial) {
         status.inicia();
         initFechados();
-       
+
         Queue<Nodo> abertos = new PriorityQueue<Nodo>();
-        
+
         abertos.add(new Nodo(inicial, null));
-        
+
         while (!parar && abertos.size() > 0) {
-            
+
             //System.out.print("abertos "+abertos);
             Nodo n = abertos.remove();
             //System.out.println("pegando "+n);
@@ -41,14 +45,14 @@ public class BuscaLargura<E extends Estado> extends Busca<E> {
                 status.termina(true);
                 return n;
             }
-                        
-            abertos.addAll( sucessores(n) );
+
+            abertos.addAll(sucessores(n));
         }
         status.termina(false);
         return null;
     }
-    
+
     public String toString() {
-    	return "BL - Busca em Largura";
+        return "BL - Busca em Largura";
     }
 }

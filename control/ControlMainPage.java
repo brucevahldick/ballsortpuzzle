@@ -2,6 +2,7 @@ package control;
 
 import ballsortpuzzle.BallsortPuzzle;
 import busca.BuscaLargura;
+import busca.BuscaProfundidade;
 import busca.Nodo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,8 @@ import visao.MainPage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import visao.Puzzle;
 import visao.Sobre;
@@ -55,10 +58,23 @@ public class ControlMainPage {
         }
     }
 
-    public void iniciarBuscaProfundidade() {
+    public void iniciarBuscaProfundidade() throws Exception {
         ViewBuscaProfundidade viewBuscaProfundidade = new ViewBuscaProfundidade();
         buildPuzzle(puzzle.returnBalls(), viewBuscaProfundidade);
         viewBuscaProfundidade.toggleView(true);
+        
+        BuscaProfundidade<BallsortPuzzle> bProfundidade = new BuscaProfundidade<BallsortPuzzle>();
+        Nodo n = bProfundidade.busca(puzzle);
+        if (n == null) {
+            System.out.println("não existe solução");
+        } else {
+            Nodo w = n;
+            while (w != null) {
+                BallsortPuzzle bsp = (BallsortPuzzle) w.getEstado();
+                System.out.println(bsp.toString());
+                w = w.getPai();
+            }
+        }
     }
 
     public void actionSelectFile() {
@@ -90,7 +106,11 @@ public class ControlMainPage {
         mainPage.addActionBuscaProfundidade(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                iniciarBuscaProfundidade();
+                try {
+                    iniciarBuscaProfundidade();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
                 mainPage.toggleView(false);
             }
         });
