@@ -44,7 +44,7 @@ public class ControlMainPage {
         buildPuzzle(puzzle.returnBalls(), viewBuscaLargura);
         viewBuscaLargura.toggleView(true);
 
-        BuscaLargura<BallsortPuzzle> bLargura = new BuscaLargura<BallsortPuzzle>();
+        BuscaLargura<BallsortPuzzle> bLargura = new BuscaLargura<>();
         Nodo n = bLargura.busca(puzzle);
         if (n == null) {
             System.out.println("não existe solução");
@@ -63,7 +63,7 @@ public class ControlMainPage {
         buildPuzzle(puzzle.returnBalls(), viewBuscaProfundidade);
         viewBuscaProfundidade.toggleView(true);
         
-        BuscaProfundidade<BallsortPuzzle> bProfundidade = new BuscaProfundidade<BallsortPuzzle>();
+        BuscaProfundidade<BallsortPuzzle> bProfundidade = new BuscaProfundidade<>();
         Nodo n = bProfundidade.busca(puzzle);
         if (n == null) {
             System.out.println("não existe solução");

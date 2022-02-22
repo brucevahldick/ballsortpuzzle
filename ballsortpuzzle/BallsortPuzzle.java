@@ -4,6 +4,7 @@ import busca.Estado;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import stack.base.ArrayStack;
 
 /*
@@ -30,9 +31,11 @@ public class BallsortPuzzle implements Estado {
     private static class Coluna extends ArrayStack {
 
         public Coluna() {
+            super(4);
         }
 
         public Coluna(String s) {
+            super(4);
             if (s != null) {
                 String[] result = s.split("\\s");
                 for (int i = result.length - 1; i >= 0; i--) {
