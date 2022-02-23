@@ -13,7 +13,7 @@ public class MainPage extends javax.swing.JFrame implements Puzzle{
 
     public MainPage() {
         initComponents();
-        fc.setCurrentDirectory(new File(".\\puzzlesBallSort"));
+        fc.setCurrentDirectory(new File(".\\src\\puzzlesBallSort"));
         setTitle("Ballsort Puzzle");
     }
 
