@@ -6,10 +6,9 @@ public class Teste {
         String[] vetor = s.split("\\s");
         BallsortPuzzle bsp = new BallsortPuzzle(vetor);
         BallsortPuzzle outro = new BallsortPuzzle(bsp.returnColumnsAsVetor());
-        
-        System.out.println("bsp: "+bsp);
+        System.out.println("bsp: \n"+bsp);
         System.out.println(bsp.hashCode());
-        System.out.println("outro: "+bsp);
+        System.out.println("outro: \n"+bsp);
         System.out.println(outro.hashCode());
         
         System.out.println(bsp.equals(outro));

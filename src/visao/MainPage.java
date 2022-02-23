@@ -1,25 +1,30 @@
 package visao;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class MainPage extends javax.swing.JFrame implements Puzzle {
+public class MainPage extends javax.swing.JFrame implements Puzzle{
 
     final public JFileChooser fc = new JFileChooser();
 
     public MainPage() {
         initComponents();
-        fc.setCurrentDirectory(new File("C:\\Users\\Bruce Vahldick\\Documents\\NetBeansProjects\\BallSortPuzzle\\src\\puzzles"));
+        fc.setCurrentDirectory(new File(".\\puzzlesBallSort"));
+        setTitle("Ballsort Puzzle");
     }
 
+    @Override
     public void toggleView(boolean stage) {
         this.setVisible(stage);
+    }
+    
+    public void enableButtons(){
+        buscaLargura.setEnabled(true);
+        buscaProfundidade.setEnabled(true);
     }
 
     public void addActionSelectFile(ActionListener action) {
@@ -28,21 +33,25 @@ public class MainPage extends javax.swing.JFrame implements Puzzle {
 
     public void addActionBuscaLargura(ActionListener action) {
         buscaLargura.addActionListener(action);
+        buscaLargura.setEnabled(false);
     }
 
     public void addActionBuscaProfundidade(ActionListener actionListener) {
         buscaProfundidade.addActionListener(actionListener);
+        buscaProfundidade.setEnabled(false);
     }
 
     public void addActionSobre(ActionListener actionListener) {
         sobre.addActionListener(actionListener);
     }
-
-    @Override
+    
+   @Override
     public void clearMainPanel() {
-        painelPrincipal.removeAll();
+        for(Component component : painelPrincipal.getComponents())
+            painelPrincipal.remove(component);
+        
     }
-
+    
     @Override
     public void addBall(String background, int x, int y) {
 

@@ -1,24 +1,57 @@
 package visao;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class ViewBuscaProfundidade extends javax.swing.JFrame implements Puzzle {
-    
-    public ViewBuscaProfundidade() {
+public class ViewBuscaLargura extends javax.swing.JFrame implements Puzzle {
+
+    public ViewBuscaLargura() {
         initComponents();
+        setTitle("Ballsort Puzzle - Busca Largura");
     }
 
+    @Override
     public void toggleView(boolean stage) {
         this.setVisible(stage);
     }
     
+    public void setTextPosicaoLabel(String s){
+        posicaoLarguraLabel.setText(s);
+    }
+
+    public void togglePrimeiroEstado(boolean b) {
+        primeiroEstado.setEnabled(b);
+        anterior.setEnabled(b);
+    }
+
+    public void toggleUltimoEstado(boolean b) {
+        ultimoEstado.setEnabled(b);
+        proximo.setEnabled(b);
+    }
+
+    public void addActionPrimeiroEstado(ActionListener action) {
+        primeiroEstado.addActionListener(action);
+    }
+
+    public void addActionAnterior(ActionListener action) {
+        anterior.addActionListener(action);
+    }
+
+    public void addActionProximo(ActionListener action) {
+        proximo.addActionListener(action);
+    }
+
+    public void addActionUltimoEstado(ActionListener action) {
+        ultimoEstado.addActionListener(action);
+    }
+
     @Override
     public void clearMainPanel() {
-        painelPrincipal.removeAll();
+        for (Component component : painelPrincipal.getComponents()) {
+            painelPrincipal.remove(component);
+        }
     }
 
     @Override
@@ -40,12 +73,11 @@ public class ViewBuscaProfundidade extends javax.swing.JFrame implements Puzzle 
 
         jPanel1 = new javax.swing.JPanel();
         painelPrincipal = new javax.swing.JPanel();
-        buscaProfundidade = new javax.swing.JButton();
-        buscaProfundidade1 = new javax.swing.JButton();
-        buscaProfundidade2 = new javax.swing.JButton();
-        buscaProfundidade3 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        primeiroEstado = new javax.swing.JButton();
+        proximo = new javax.swing.JButton();
+        anterior = new javax.swing.JButton();
+        ultimoEstado = new javax.swing.JButton();
+        posicaoLarguraLabel = new javax.swing.JLabel();
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         painelPrincipal.setMaximumSize(new java.awt.Dimension(560, 160));
@@ -64,13 +96,13 @@ public class ViewBuscaProfundidade extends javax.swing.JFrame implements Puzzle 
             .addGap(0, 160, Short.MAX_VALUE)
         );
 
-        buscaProfundidade.setText("|<<");
+        primeiroEstado.setText("|<<");
 
-        buscaProfundidade1.setText(">>");
+        proximo.setText(">>");
 
-        buscaProfundidade2.setText("<<");
+        anterior.setText("<<");
 
-        buscaProfundidade3.setText(">>|");
+        ultimoEstado.setText(">>|");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,13 +114,13 @@ public class ViewBuscaProfundidade extends javax.swing.JFrame implements Puzzle 
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
-                .addComponent(buscaProfundidade, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(primeiroEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buscaProfundidade2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buscaProfundidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(proximo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buscaProfundidade3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ultimoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,33 +130,46 @@ public class ViewBuscaProfundidade extends javax.swing.JFrame implements Puzzle 
                 .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscaProfundidade1)
-                    .addComponent(buscaProfundidade3)
-                    .addComponent(buscaProfundidade2)
-                    .addComponent(buscaProfundidade))
-                .addContainerGap())
+                    .addComponent(proximo)
+                    .addComponent(ultimoEstado)
+                    .addComponent(anterior)
+                    .addComponent(primeiroEstado))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(posicaoLarguraLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(posicaoLarguraLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscaProfundidade;
-    private javax.swing.JButton buscaProfundidade1;
-    private javax.swing.JButton buscaProfundidade2;
-    private javax.swing.JButton buscaProfundidade3;
+    private javax.swing.JButton anterior;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel painelPrincipal;
+    private javax.swing.JLabel posicaoLarguraLabel;
+    private javax.swing.JButton primeiroEstado;
+    private javax.swing.JButton proximo;
+    private javax.swing.JButton ultimoEstado;
     // End of variables declaration//GEN-END:variables
 }

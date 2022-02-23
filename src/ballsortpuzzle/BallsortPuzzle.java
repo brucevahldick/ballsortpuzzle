@@ -4,7 +4,6 @@ import busca.Estado;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import stack.base.ArrayStack;
 
 /*
@@ -147,7 +146,6 @@ public class BallsortPuzzle implements Estado {
                         if (!colunas.get(colunaI).apenasUmaCor()) {
                             BallsortPuzzle novo = new BallsortPuzzle(returnColumnsAsVetor());
                             novo.getColunas().get(colunaJ).push(novo.getColunas().get(colunaI).pop());
-                            System.out.println(novo);
                             suc.add(novo);
                         }
                     }
@@ -161,6 +159,20 @@ public class BallsortPuzzle implements Estado {
     @Override
     public String toString() {
         return returnBalls();
+    }
+    
+    public boolean equals(Object o){
+        try{
+            return this.toString().equals(o.toString());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    @Override
+    public int hashCode(){
+        return toString().hashCode();
     }
 
     public ArrayList<Coluna> getColunas() {

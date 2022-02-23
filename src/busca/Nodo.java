@@ -97,7 +97,7 @@ public class Nodo implements Comparable {
     public boolean equals(Object o) {
         try {
             Nodo n = (Nodo)o;
-            return this.estado.toString().equals(n.estado.toString());
+            return this.estado.equals(n.estado);
         } catch (Exception e) {
             e.printStackTrace();
         }
